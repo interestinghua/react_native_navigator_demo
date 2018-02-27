@@ -26,21 +26,15 @@ const StackNav = StackNavigator({
     // 将需要跳转的页面注册在这里，全局才可以跳转
     Nav01: {
         screen: Nav01,
-        navigationOptions: {
-            header: null
-        }
+        navigationOptions: {}
     },
     Nav02: {
         screen: Nav02,
-        navigationOptions: {
-            header: null
-        }
+        navigationOptions: {}
     },
     Nav03: {
         screen: Nav03,
-        navigationOptions: {
-            header: null
-        }
+        navigationOptions: {}
     }
 }, {
     initialRouteName: "Nav01",
@@ -52,11 +46,16 @@ const StackNav = StackNavigator({
         headerStyle: {
             backgroundColor: '#f4511e',
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#333333',
         headerTitleStyle: {
             fontWeight: 'bold',
         },
+        headerTitle: "App",
+        showIcon: true,
+        swipeEnabled: false,
+        animationEnabled: false,
     },
+    mode: 'card'
 });
 
 export default StackNav;

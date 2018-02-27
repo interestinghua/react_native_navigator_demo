@@ -11,6 +11,7 @@ import {
     Text,
     View,
     NativeModules,
+    Image,
     TouchableOpacity
 } from 'react-native';
 import Nav02 from "./Nav02";
@@ -21,6 +22,8 @@ const instructions = Platform.select({
     android: 'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
+
+// let nativeImageSource = require('nativeImageSource');
 
 type Props = {};
 export default class Nav01 extends Component<Props> {
@@ -37,6 +40,13 @@ export default class Nav01 extends Component<Props> {
     };
 
     render() {
+
+        // let mipmapImg = {
+        //     android: 'mipmap/ic_launcher',
+        //     width: 120,
+        //     height: 120
+        // };
+
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
@@ -91,5 +101,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: 10,
         color: 'black'
-    }
+    },
+    icon: {
+        width: 24,
+        height: 24,
+    },
 });
