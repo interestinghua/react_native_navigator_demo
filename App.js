@@ -13,7 +13,9 @@ import {
 } from 'react-native';
 
 import StackRoute from "./component/StackRouteDemo"
-import TabRoute from "./component/TabRouteDemo"
+import TabRoute from "./component/TabRouteBottomDemo"
+import TabRouteTop from "./component/TabRouteTopDemo"
+import DrawerRoute from "./component/DrawerNavigatorDemo"
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -21,7 +23,9 @@ export default class App extends Component<Props> {
     render() {
         return (
 
-            <TabRoute/>
+            <TabRouteTop/>
+            // <DrawerRoute/>
+            // <TabRoute/>
             // <StackRoute/>
 
         )
