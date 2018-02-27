@@ -36,7 +36,6 @@ export default class Nav01 extends Component<Props> {
         },
     };
 
-
     render() {
         return (
             <View style={styles.container}>

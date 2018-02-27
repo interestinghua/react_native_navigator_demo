@@ -22,7 +22,7 @@ import Nav01 from "./Nav01"
 import Nav02 from "./Nav02"
 import Nav03 from "./Nav03"
 
-const RouterNavigator = StackNavigator({
+const StackNav = StackNavigator({
     // 将需要跳转的页面注册在这里，全局才可以跳转
     Nav01: {
         screen: Nav01,
@@ -59,4 +59,4 @@ const RouterNavigator = StackNavigator({
     },
 });
 
-export default RouterNavigator;
+export default StackNav;

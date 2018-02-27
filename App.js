@@ -12,13 +12,14 @@ import {
     View
 } from 'react-native';
 
-import RouterNavigator from "./component/ReactNavigatorDemo"
+import StackNav from "./component/StackNavigatorDemo"
+import TabNav from "./component/TabNavigatorDemo"
 
 type Props = {};
 export default class App extends Component<Props> {
     render() {
         return (
-            <RouterNavigator/>
+            <TabNav/>
         )
     }
 }

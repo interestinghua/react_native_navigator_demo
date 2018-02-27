@@ -11,6 +11,7 @@ import {
     StyleSheet,
     Text,
     View,
+    Button,
     TouchableOpacity
 } from 'react-native';
 
@@ -25,10 +26,17 @@ type Props = {};
 export default class Nav02 extends Component<Props> {
 
     static navigationOptions = ({navigation}) => {
-        const {params} = navigation.state;
+
+        const params = navigation.state.params || {};
 
         return {
-            title: params ? params.otherParam : 'A Nested Details Screen',
+            headerLeft: (
+                <Button
+                    onPress={() => navigation.navigate('Nav01')}
+                    title="Info"
+                    color="#000"
+                />
+            ),
         };
     };
 
