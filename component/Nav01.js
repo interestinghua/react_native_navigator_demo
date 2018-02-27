@@ -24,6 +24,19 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class Nav01 extends Component<Props> {
+
+    static navigationOptions = {
+        title: 'Nav01',
+        headerStyle: {
+            backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+        },
+    };
+
+
     render() {
         return (
             <View style={styles.container}>

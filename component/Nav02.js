@@ -24,6 +24,14 @@ const instructions = Platform.select({
 type Props = {};
 export default class Nav02 extends Component<Props> {
 
+    static navigationOptions = ({navigation}) => {
+        const {params} = navigation.state;
+
+        return {
+            title: params ? params.otherParam : 'A Nested Details Screen',
+        };
+    };
+
     componentWillMount() {
         //一次初始化只调用一次
         const {navigate} = this.props.navigation;

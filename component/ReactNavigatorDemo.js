@@ -47,7 +47,16 @@ const RouterNavigator = StackNavigator({
     transitionConfig: () => ({
         // 只要修改最后的forVertical就可以实现不同的动画了。
         screenInterpolator: CardStackStyleInterpolator.forHorizontal,
-    })
+    }),
+    navigationOptions: {
+        headerStyle: {
+            backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+        },
+    },
 });
 
 export default RouterNavigator;
