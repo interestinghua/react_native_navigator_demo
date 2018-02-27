@@ -12,8 +12,8 @@ import {
     View
 } from 'react-native';
 
-import StackNav from "./component/StackNavigatorDemo"
-import TabNav from "./component/TabNavigatorDemo"
+import StackRoute from "./component/StackRouteDemo"
+import TabRoute from "./component/TabRouteDemo"
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -21,8 +21,8 @@ export default class App extends Component<Props> {
     render() {
         return (
 
-            <TabNav/>
-            // <StackNav/>
+            <TabRoute/>
+            // <StackRoute/>
 
         )
     }

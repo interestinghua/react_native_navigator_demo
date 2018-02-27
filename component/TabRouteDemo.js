@@ -21,7 +21,7 @@ import Nav02 from "./Nav02"
 import Nav03 from "./Nav03"
 import TabBarItem from "./TabBarItem"
 
-export default TabNavigator({
+const TabRoute = TabNavigator({
         // 将需要跳转的页面注册在这里，全局才可以跳转
         Nav01: {
             screen: Nav01,
@@ -72,7 +72,7 @@ export default TabNavigator({
         swipeEnabled: true,             // 是否可以左右滑动切换tab
         animationEnabled: true,         // 切换页面时是否有动画效果
         lazy: true,                     // 懒加载
-        backBehavior: 'nome',           // 按 back 键是否跳转到第一个Tab(首页)， none 为不跳转
+        backBehavior: 'none',           // 按 back 键是否跳转到第一个Tab(首页)， none 为不跳转
         tabBarOptions: {
             showIcon: true,
             showLabel: true,
@@ -83,3 +83,5 @@ export default TabNavigator({
         },
     }
 );
+
+export default TabRoute

@@ -22,7 +22,7 @@ import Nav01 from "./Nav01"
 import Nav02 from "./Nav02"
 import Nav03 from "./Nav03"
 
-const StackNav = StackNavigator({
+const StackRoute = StackNavigator({
     // 将需要跳转的页面注册在这里，全局才可以跳转
     Nav01: {
         screen: Nav01,
@@ -58,4 +58,4 @@ const StackNav = StackNavigator({
     mode: 'card'
 });
 
-export default StackNav;
+export default StackRoute;
