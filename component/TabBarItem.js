@@ -14,12 +14,12 @@ export default class TabBarItem extends Component {
         selectedImage: NaN,
     };
 
-    static propTypes = {
-        tintColor: React.PropTypes.string,
-        focused: React.PropTypes.bool,
-        normalImage: React.PropTypes.number,
-        selectedImage: React.PropTypes.number,
-    };
+    // static propTypes = {
+    //     tintColor: React.PropTypes.string,
+    //     focused: React.PropTypes.bool,
+    //     normalImage: React.PropTypes.number,
+    //     selectedImage: React.PropTypes.number,
+    // };
 
     render() {
         console.debug("-----------------------------------------------");

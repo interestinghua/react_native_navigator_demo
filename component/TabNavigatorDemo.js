@@ -19,6 +19,7 @@ import {
 import Nav01 from "./Nav01"
 import Nav02 from "./Nav02"
 import Nav03 from "./Nav03"
+import TabBarItem from "./TabBarItem"
 
 export default TabNavigator({
         // 将需要跳转的页面注册在这里，全局才可以跳转
@@ -30,8 +31,8 @@ export default TabNavigator({
                     <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('./img/ability_01_icon.png')}
-                        selectedImage={require('./img/tabbar/ability_01_icon.png')}
+                        normalImage={require('../img/ability_01_icon.png')}
+                        selectedImage={require('../img/ability_01_icon.png')}
                     />
                 ),
             },
@@ -44,8 +45,8 @@ export default TabNavigator({
                     <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('./img/ability_02_icon.png')}
-                        selectedImage={require('./img/tabbar/ability_02_icon.png')}
+                        normalImage={require('../img/ability_02_icon.png')}
+                        selectedImage={require('../img/ability_02_icon.png')}
                     />
                 ),
             },
@@ -58,14 +59,14 @@ export default TabNavigator({
                     <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('./img/ability_03_icon.png')}
-                        selectedImage={require('./img/tabbar/ability_03_icon.png')}
+                        normalImage={require('../img/ability_03_icon.png')}
+                        selectedImage={require('../img/ability_03_icon.png')}
                     />
                 ),
             },
         }
     }, {
-        initialRouteName: 'Home',
+        initialRouteName: 'Nav01',
         tabBarComponent: TabBarBottom,  // TabBarBottom
         tabBarPosition: 'bottom',       // 显示位置，android 默认是显示在页面顶端的
         swipeEnabled: true,             // 是否可以左右滑动切换tab
@@ -75,8 +76,8 @@ export default TabNavigator({
         tabBarOptions: {
             showIcon: true,
             showLabel: true,
-            activeTintColor: '#06C1AE', //  激活版块的颜色
-            inactiveTintColor: '#979797', // 非激活版块的颜色
+            // activeTintColor: '#06C1AE', //  激活版块的颜色
+            // inactiveTintColor: '#979797', // 非激活版块的颜色
             style: {backgroundColor: '#ffffff'},// 背景颜色
             labelStyle: {fontSize: 12}          // 文字大小
         },
