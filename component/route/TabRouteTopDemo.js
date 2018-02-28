@@ -16,9 +16,9 @@ import {
     TabNavigator, StackNavigator, TabBarTop
 } from 'react-navigation';
 
-import Nav01 from "./Nav01"
-import Nav02 from "./Nav02"
-import Nav03 from "./Nav03"
+import Nav01 from "../Nav01"
+import Nav02 from "../Nav02"
+import Nav03 from "../Nav03"
 
 const TabRouteConfigs = {
     Nav01: {

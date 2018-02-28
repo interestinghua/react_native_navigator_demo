@@ -1,11 +1,10 @@
 
 import React, {Component} from 'react';
 import {DrawerNavigator, StackNavigator, TabBarBottom, TabNavigator} from "react-navigation";
-import Nav01 from "./Nav01";
-import Nav02 from "./Nav02";
-import Nav03 from "./Nav03";
+import Nav01 from "../Nav01";
+import Nav02 from "../Nav02";
+import Nav03 from "../Nav03";
 import TabBarItem from "./TabBarItem";
-import TabRoute from "./TabRouteBottomDemo";
 
 const DrawerRouteConfigs = {
     Nav01: {
@@ -16,8 +15,8 @@ const DrawerRouteConfigs = {
                 <TabBarItem
                     tintColor={tintColor}
                     focused={focused}
-                    normalImage={require('../img/ability_01_icon.png')}
-                    selectedImage={require('../img/ability_01_icon.png')}
+                    normalImage={require('../../img/ability_01_icon.png')}
+                    selectedImage={require('../../img/ability_01_icon.png')}
                 />
             ),
         }),
@@ -30,8 +29,8 @@ const DrawerRouteConfigs = {
                 <TabBarItem
                     tintColor={tintColor}
                     focused={focused}
-                    normalImage={require('../img/ability_02_icon.png')}
-                    selectedImage={require('../img/ability_02_icon.png')}
+                    normalImage={require('../../img/ability_02_icon.png')}
+                    selectedImage={require('../../img/ability_02_icon.png')}
                 />
             ),
         },
@@ -44,8 +43,8 @@ const DrawerRouteConfigs = {
                 <TabBarItem
                     tintColor={tintColor}
                     focused={focused}
-                    normalImage={require('../img/ability_03_icon.png')}
-                    selectedImage={require('../img/ability_03_icon.png')}
+                    normalImage={require('../../img/ability_03_icon.png')}
+                    selectedImage={require('../../img/ability_03_icon.png')}
                 />
             ),
         },

@@ -16,9 +16,9 @@ import {
     TabNavigator, TabBarBottom
 } from 'react-navigation';
 
-import Nav01 from "./Nav01"
-import Nav02 from "./Nav02"
-import Nav03 from "./Nav03"
+import Nav01 from "../Nav01"
+import Nav02 from "../Nav02"
+import Nav03 from "../Nav03"
 import TabBarItem from "./TabBarItem"
 
 const TabRoute = TabNavigator({
@@ -31,8 +31,8 @@ const TabRoute = TabNavigator({
                     <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('../img/ability_01_icon.png')}
-                        selectedImage={require('../img/ability_01_icon.png')}
+                        normalImage={require('../../img/ability_01_icon.png')}
+                        selectedImage={require('../../img/ability_01_icon.png')}
                     />
                 ),
             },
@@ -45,8 +45,8 @@ const TabRoute = TabNavigator({
                     <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('../img/ability_02_icon.png')}
-                        selectedImage={require('../img/ability_02_icon.png')}
+                        normalImage={require('../../img/ability_02_icon.png')}
+                        selectedImage={require('../../img/ability_02_icon.png')}
                     />
                 ),
             },
@@ -59,8 +59,8 @@ const TabRoute = TabNavigator({
                     <TabBarItem
                         tintColor={tintColor}
                         focused={focused}
-                        normalImage={require('../img/ability_03_icon.png')}
-                        selectedImage={require('../img/ability_03_icon.png')}
+                        normalImage={require('../../img/ability_03_icon.png')}
+                        selectedImage={require('../../img/ability_03_icon.png')}
                     />
                 ),
             },
