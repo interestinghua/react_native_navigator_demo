@@ -43,7 +43,7 @@ const TabRouteConfigs = {
 };
 
 const TabNavigatorConfigs = {
-    initialRouteName: 'Home',
+    initialRouteName: 'Nav01',
     tabBarComponent: TabBarTop,
     tabBarPosition: 'top',
     lazy: true,

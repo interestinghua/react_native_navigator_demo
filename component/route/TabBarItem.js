@@ -28,7 +28,7 @@ export default class TabBarItem extends Component {
         return (
 
 
-            < Image source={this.props.focused ? this.props.selectedImage : this.props.normalImage}
+            <Image source={this.props.focused ? this.props.selectedImage : this.props.normalImage}
                     style={{width: 27, height: 27}}
             />
         );
