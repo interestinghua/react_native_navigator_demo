@@ -1,9 +1,9 @@
 
 import React, {Component} from 'react';
 import {DrawerNavigator, StackNavigator, TabBarBottom, TabNavigator} from "react-navigation";
-import Nav01 from "../Nav01";
-import Nav02 from "../Nav02";
-import Nav03 from "../Nav03";
+import Nav01 from "../component/Nav01";
+import Nav02 from "../component/Nav02";
+import Nav03 from "../component/Nav03";
 import TabBarItem from "./TabBarItem";
 
 const DrawerRouteConfigs = {

@@ -53,7 +53,7 @@ export default class Nav01 extends Component<Props> {
                     Welcome to Nav01!
                 </Text>
 
-                <Image source={require('../img/ability_01_icon.png')}
+                <Image source={require('../../img/ability_01_icon.png')}
                        style={{width: 27, height: 27}}/>
 
                 <TouchableOpacity style={styles.button} onPress={() => {

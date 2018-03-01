@@ -12,10 +12,10 @@ import {
     View
 } from 'react-native';
 
-import StackRoute from "./component/route/StackRouteDemo"
-import TabRoute from "./component/route/TabRouteBottomDemo"
-import TabRouteTop from "./component/route/TabRouteTopDemo"
-import DrawerRoute from "./component/route/DrawerNavigatorDemo"
+import StackRoute from "./app/route/StackRouteDemo"
+import TabRoute from "./app/route/TabRouteBottomDemo"
+import TabRouteTop from "./app/route/TabRouteTopDemo"
+import DrawerRoute from "./app/route/DrawerNavigatorDemo"
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -23,8 +23,8 @@ export default class App extends Component<Props> {
     render() {
         return (
 
-            <TabRouteTop/>
-            // <DrawerRoute/>
+            <DrawerRoute/>
+            // <TabRouteTop/>
             // <TabRoute/>
             // <StackRoute/>
 

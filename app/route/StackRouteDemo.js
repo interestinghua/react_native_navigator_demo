@@ -18,9 +18,9 @@ import {
 
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 
-import Nav01 from "../Nav01"
-import Nav02 from "../Nav02"
-import Nav03 from "../Nav03"
+import Nav01 from "../component/Nav01"
+import Nav02 from "../component/Nav02"
+import Nav03 from "../component/Nav03"
 
 const StackRoute = StackNavigator({
     // 将需要跳转的页面注册在这里，全局才可以跳转
