@@ -17,13 +17,14 @@ import TabRoute from "./app/route/TabRouteBottomDemo"
 import TabRouteTop from "./app/route/TabRouteTopDemo"
 import DrawerRoute from "./app/route/DrawerNavigatorDemo"
 
-type Props = {};
+type Props = { type: 1 };
 export default class App extends Component<Props> {
 
     render() {
         return (
 
-            <DrawerRoute/>
+            <DrawerRoute />
+        // screenProps={this.props}
             // <TabRouteTop/>
             // <TabRoute/>
             // <StackRoute/>

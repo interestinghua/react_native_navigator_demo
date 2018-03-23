@@ -13,6 +13,8 @@ import {
     TouchableOpacity
 } from 'react-native';
 
+import SmartFlatList from 'react-native-smart-refresh-flatlist'
+
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -22,7 +24,23 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class Nav03 extends Component<Props> {
+
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+
     render() {
+
+        // return (<SmartFlatList
+        //     topBackgroundColor={'#fccb57'}
+        //     initialNumToRender={7}
+        //     renderItem={(data) => this.renderItem(data)}
+        //     initialPage={1}
+        //     pageSize={10}
+        //     onFetch={this.onFetch.bind(this)}
+        // />)
+
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>

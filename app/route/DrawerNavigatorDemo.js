@@ -1,9 +1,9 @@
-
 import React, {Component} from 'react';
 import {DrawerNavigator, StackNavigator, TabBarBottom, TabNavigator} from "react-navigation";
 import Nav01 from "../component/Nav01";
 import Nav02 from "../component/Nav02";
 import Nav03 from "../component/Nav03";
+import List from "../list/RefreshFlatList";
 import TabBarItem from "./TabBarItem";
 
 const DrawerRouteConfigs = {
@@ -48,11 +48,25 @@ const DrawerRouteConfigs = {
                 />
             ),
         },
+    },
+    List: {
+        screen: List,
+        navigationOptions: {
+            drawerLabel: '列表',
+            drawerIcon: ({focused, tintColor}) => (
+                <TabBarItem
+                    tintColor={tintColor}
+                    focused={focused}
+                    normalImage={require('../../img/ability_07_icon.png')}
+                    selectedImage={require('../../img/ability_07_icon.png')}
+                />
+            ),
+        },
     }
 };
 
 const DrawerNavigatorConfigs = {
-    initialRouteName: 'Nav01',
+    initialRouteName: 'List',
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     lazy: true,

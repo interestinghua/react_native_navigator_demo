@@ -8,8 +8,11 @@
     "clean": "find node_modules -type f -name .babelrc | grep -v /react-native/ | xargs rm"
   },
   "dependencies": {
+    "prop-types": "^15.6.1",
     "react": "16.2.0",
     "react-native": "0.53.3",
+    "react-native-refreshlist": "^1.0.3",
+    "react-native-smart-refresh-flatlist": "^1.0.5",
     "react-navigation": "^1.2.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
@@ -19,6 +22,7 @@
     "babel-jest": "22.4.1",
     "babel-preset-react-native": "4.0.0",
     "jest": "22.4.2",
+    "react-native-smart-refresh-flatlist": "^1.0.5",
     "react-test-renderer": "16.2.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
