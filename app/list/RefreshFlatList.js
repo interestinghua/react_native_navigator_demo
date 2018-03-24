@@ -14,6 +14,8 @@ import {
 import PropTypes from 'prop-types'
 import RefreshList from 'react-native-refreshlist'
 
+
+
 const preData = [{keysss: 1}, {keysss: 2}, {keysss: 3}, {keysss: 4}, {keysss: 5}, {keysss: 6}, {keysss: 7}, {keysss: 8}, {keysss: 9}, {keysss: 10}];
 const newData = [{keysss: 12}, {keysss: 23}, {keysss: 34}, {keysss: 45}, {keysss: 56}, {keysss: 67}, {keysss: 78}, {keysss: 89}, {keysss: 90}, {keysss: 10}];
 
@@ -31,6 +33,10 @@ export default class RefreshAndLoadMorePage extends React.Component {
 
         super(props);
         this.moreTime = 0;
+
+        this.state = {
+            responseText : null
+        };
 
         if (this.props.type === 1) {
             setTimeout(() => {
@@ -150,6 +156,11 @@ export default class RefreshAndLoadMorePage extends React.Component {
 
     componentDidMount() {
         ToastAndroid.show(">>>" + this.props.type + "<<<", ToastAndroid.SHORT);
+        request.get()
+    }
+
+    componentWillUpdate() {
+
     }
 
     render() {
