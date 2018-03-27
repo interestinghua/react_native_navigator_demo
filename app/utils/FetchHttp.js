@@ -1,5 +1,4 @@
-let baseUrl = 'https://api.douban.com/v2/';  //服务器地址 book/1003078
-let token = '';
+import {BOOKAPI} from '../common/Constant'
 
 /**
  * 让fetch也可以timeout
@@ -32,7 +31,6 @@ function timeoutFetch(fetchPromise, timeout = 10000) {
     return abortablePromise;
 }
 
-
 /**
  * @param {string} url 接口地址
  * @param {string} method 请求方法：GET、POST，只能大写
@@ -42,8 +40,7 @@ function timeoutFetch(fetchPromise, timeout = 10000) {
 export function fetchRequest(url, method, params = '') {
 
     let header = {
-        "Content-Type": "application/json;charset=UTF-8",
-        "accesstoken": token  //用户登陆后返回的token，某些涉及用户数据的接口需要在header中加上token
+        // "Content-Type": "application/json"
     };
 
     console.log('request url:', url, params);  //打印请求参数
@@ -51,9 +48,10 @@ export function fetchRequest(url, method, params = '') {
     if (params === '') {
         //如果网络请求中没有参数
         return new Promise(function (resolve, reject) {
-            timeoutFetch(fetch(baseUrl + url, {
+            timeoutFetch(fetch(BOOKAPI.BASEURL + url, {
                 method: method,
-                headers: header
+                headers: header,
+                credentials: 'same-origin',
             })).then((response) => response.json())
                 .then((responseData) => {
                     console.log('res:', url, responseData);  //网络请求成功返回的数据
@@ -65,22 +63,76 @@ export function fetchRequest(url, method, params = '') {
                 });
         });
     } else {
-        // 如果网络请求中带有参数
-        return new Promise(function (resolve, reject) {
-            timeoutFetch(fetch(baseUrl + url, {
-                method: method,
-                headers: header,
-                body: JSON.stringify(params)   //body参数，通常需要转换成字符串后服务器才能解析
-            }))
-                .then((response) => response.json())
-                .then((responseData) => {
-                    console.log('res:', url, responseData);   //网络请求成功返回的数据
-                    resolve(responseData);
+        //如果网络请求中带有参数
+
+        if (method === 'GET') {
+
+            // let esc = encodeURIComponent;
+            // let query = Object.keys(params)
+            //     .map(k => k + '=' + esc(params[k]))
+            //     .join('&');
+
+            let paramsArray = [];
+            Object.keys(params).forEach(key => paramsArray.push(key + '=' + params[key]));
+
+            console.log('params:', params);
+            console.log('paramsArray:', paramsArray);
+
+            if (url.search(/\?/) === -1) {
+                url += '?' + paramsArray.join('&');
+            } else {
+                url += '&' + paramsArray.join('&');
+            }
+
+            console.log('url:', BOOKAPI.BASEURL + url);
+
+            return new Promise(function (resolve, reject) {
+                timeoutFetch(fetch(BOOKAPI.BASEURL + url, {
+                    method: method,
+                    headers: header,
+                    mode: 'cors',
+                    cache: 'default',
+                    credentials: "same-origin",
+                }))
+                    .then((response) => response.json())
+                    .then((responseData) => {
+                        console.log('res:', url, responseData);   //网络请求成功返回的数据
+                        resolve(responseData);
+                    })
+                    .catch((err) => {
+                        console.log('err:', url, err);   //网络请求失败返回的数据
+                        reject(err);
+                    });
+            });
+
+        } else if (method === 'POST') {
+
+            return new Promise(function (resolve, reject) {
+                fetch(BOOKAPI.BASEURL + url, {
+                    method: method,
+                    headers: header,
+                    mode: 'cors',
+                    cache: 'default',
+                    credentials: "same-origin",
+                    body: JSON.stringify(params)   //body参数，通常需要转换成字符串后服务器才能解析
                 })
-                .catch((err) => {
-                    console.log('err:', url, err);   //网络请求失败返回的数据
-                    reject(err);
-                });
-        });
+                    .then((response) => response.json())
+                    .then((responseData) => {
+                        console.log('res:', url, responseData);   //网络请求成功返回的数据
+                        resolve(responseData);
+                    })
+                    .catch((err) => {
+                        console.log('err:', url, err);   //网络请求失败返回的数据
+                        reject(err);
+                    });
+            });
+        }
+
     }
 }
+
+// function getUserItems(req, options) {
+//     return fetch(withQuery(`${baseURL}/v1.0/${userId}/items/${itemId}`, options), {
+//         headers: getRequiredHeaders(req),
+//     });
+// }

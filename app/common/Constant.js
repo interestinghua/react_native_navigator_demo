@@ -26,7 +26,19 @@
 //     DETAIL: 'TEAM.DETAIL'
 // }
 
+/**
+ *
+ * @type {{SEARCH: string, ISBN: string}}
+ *
+ * let baseUrl = 'https://api.douban.com/v2/';  //服务器地址 book/1003078
+ let token = '';
+
+ */
+
 export const BOOKAPI={
+    TOKEN:'',
+    BASEURL:'https://api.douban.com/v2/',
     SEARCH:'book/search',
     ISBN:'book/isbn/:name'
+
 }

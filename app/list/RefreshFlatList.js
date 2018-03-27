@@ -1,7 +1,3 @@
-/**
- * Created by guzhenfu on 17/5/11.
- */
-
 import React from 'react'
 import {
     StyleSheet,
@@ -13,13 +9,13 @@ import {
 
 import PropTypes from 'prop-types'
 import RefreshList from 'react-native-refreshlist'
+import {BOOKAPI} from '../common/Constant'
+import {fetchRequest} from '../utils/FetchHttp'
 
+// const preData = [{keysss: 1}, {keysss: 2}, {keysss: 3}, {keysss: 4}, {keysss: 5}, {keysss: 6}, {keysss: 7}, {keysss: 8}, {keysss: 9}, {keysss: 10}];
+// const newData = [{keysss: 12}, {keysss: 23}, {keysss: 34}, {keysss: 45}, {keysss: 56}, {keysss: 67}, {keysss: 78}, {keysss: 89}, {keysss: 90}, {keysss: 10}];
 
-
-const preData = [{keysss: 1}, {keysss: 2}, {keysss: 3}, {keysss: 4}, {keysss: 5}, {keysss: 6}, {keysss: 7}, {keysss: 8}, {keysss: 9}, {keysss: 10}];
-const newData = [{keysss: 12}, {keysss: 23}, {keysss: 34}, {keysss: 45}, {keysss: 56}, {keysss: 67}, {keysss: 78}, {keysss: 89}, {keysss: 90}, {keysss: 10}];
-
-export default class RefreshAndLoadMorePage extends React.Component {
+export default class RefreshAndLoadMoreFlatList extends React.Component {
 
     static propTypes = {
         type: PropTypes.number
@@ -35,25 +31,28 @@ export default class RefreshAndLoadMorePage extends React.Component {
         this.moreTime = 0;
 
         this.state = {
-            responseText : null
+            data: null,
+            start: 0,
+            count: 20,
+            tag: '科幻'
         };
 
-        if (this.props.type === 1) {
-            setTimeout(() => {
-                this._listRef.setError();
-
-            }, 1000);
-        } else if (this.props.type === 2) {
-            setTimeout(() => {
-                this._listRef.setData([]);
-
-            }, 1000);
-        } else {
-            setTimeout(() => {
-                this._listRef.setData(preData);
-
-            }, 1000);
-        }
+        // if (this.props.type === 1) {
+        //     setTimeout(() => {
+        //         this._listRef.setError();
+        //
+        //     }, 1000);
+        // } else if (this.props.type === 2) {
+        //     setTimeout(() => {
+        //         this._listRef.setData([]);
+        //
+        //     }, 1000);
+        // } else {
+        //     setTimeout(() => {
+        //         this._listRef.setData(preData);
+        //
+        //     }, 1000);
+        // }
     }
 
 
@@ -62,11 +61,12 @@ export default class RefreshAndLoadMorePage extends React.Component {
      * @private
      */
     _onPullRelease(resolve) {
+        console.log("_onPullRelease");
         setTimeout(() => {
             resolve();
             this.moreTime = 0;
-            this._listRef.setData(newData);
-        }, 1500);
+            this._listRef.setData(this.state.responseText);
+        }, 500);
     }
 
     /**
@@ -75,6 +75,7 @@ export default class RefreshAndLoadMorePage extends React.Component {
      * @private
      */
     _onItemPress(item) {
+
     }
 
     /**
@@ -82,35 +83,36 @@ export default class RefreshAndLoadMorePage extends React.Component {
      * @private
      */
     _loadMore() {
-        // ToastAndroid.show(this.resume + "--", ToastAndroid.SHORT);
+        console.log("_loadMore");
+
         if (this.props.type === 4) {
             if (!this.resume) {
                 setTimeout(() => {
                     this._listRef.setError();
                     this.resume = true;
-                }, 1500);
+                }, 500);
             } else {
                 setTimeout(() => {
                     if (this.moreTime < 3) {
-                        this._listRef.addData(preData);
+                        this._listRef.addData(this.state.data);
                         this.moreTime++;
                     } else {
                         this._listRef.addData([]);
                     }
 
-                }, 1500);
+                }, 500);
             }
 
         } else {
             setTimeout(() => {
                 if (this.moreTime < 3) {
-                    this._listRef.addData(preData);
+                    this._listRef.addData(this.state.data);
                     this.moreTime++;
                 } else {
                     this._listRef.addData([]);
                 }
 
-            }, 1500);
+            }, 500);
         }
 
     }
@@ -122,6 +124,8 @@ export default class RefreshAndLoadMorePage extends React.Component {
      * @private
      */
     _renderItem(item) {
+        // JSON.stringify(response["books"])
+        console.log("_renderItem" + JSON.stringify(item));
         return (
             <TouchableHighlight
                 underlayColor="rgba(34, 26, 38, 0.1)"
@@ -129,10 +133,14 @@ export default class RefreshAndLoadMorePage extends React.Component {
                     this._onItemPress(item)
                 }}>
                 <View style={styles.listWrapper}>
-                    <View style={styles.listItemWrapper}><Text>{item.index + "1"}</Text></View>
-                    <View style={styles.listItemWrapper}><Text>{item.item.keysss + "2"}</Text></View>
-                    <View style={styles.listItemWrapper}><Text style={styles.listItemTextBlue}>{"sddsd"}</Text></View>
-                    <View style={styles.listItemWrapper}><Text style={styles.listItemTextRed}>{"sddsd"}</Text></View>
+                    <View
+                        style={styles.listItemWrapper}><Text>{item.item.isbn10}</Text></View>
+                    <View
+                        style={styles.listItemWrapper}><Text>{item.item.isbn13}</Text></View>
+                    <View style={styles.listItemWrapper}><Text
+                        style={styles.listItemTextBlue}>{item.item.pubdate}</Text></View>
+                    <View style={styles.listItemWrapper}><Text
+                        style={styles.listItemTextRed}>{item.item.binding}</Text></View>
                 </View>
             </TouchableHighlight>
         )
@@ -151,15 +159,42 @@ export default class RefreshAndLoadMorePage extends React.Component {
     }
 
     componentWillMount() {
+        console.log("componentWillMount")
 
     }
 
     componentDidMount() {
-        ToastAndroid.show(">>>" + this.props.type + "<<<", ToastAndroid.SHORT);
-        request.get()
+
+        // ToastAndroid.show(">>>" + this.props.type + "<<<", ToastAndroid.SHORT);
+        console.log("componentDidMount")
+
+        let searchParam = {
+            tag: this.state.tag,
+            start: this.state.start,
+            count: this.state.count
+        };
+
+        fetchRequest(BOOKAPI.SEARCH, 'GET', searchParam).then(
+            response => {
+
+                this.setState({
+                    'data': response["books"],
+                    'start': this.state.start++
+                });
+
+                this._listRef.setData(response["books"]);
+
+                console.log('books: ' + this.state.data)
+                console.log('start: ' + this.state.start)
+
+            }, error => {
+                console.log('error: ' + error)
+            })
     }
 
+
     componentWillUpdate() {
+        console.log("componentWillUpdate")
 
     }
 
@@ -174,7 +209,7 @@ export default class RefreshAndLoadMorePage extends React.Component {
                 <RefreshList
                     ref={(list) => this._listRef = list}
                     onPullRelease={(resolve) => this._onPullRelease(resolve)}
-                    ItemHeight={120}
+                    ItemHeight={100}
                     onEndReached={() => this._loadMore()}
                     renderItem={(item) => this._renderItem(item)}/>
             </View>
