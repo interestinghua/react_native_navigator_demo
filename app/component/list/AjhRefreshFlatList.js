@@ -10,8 +10,9 @@ import {
 
 import PropTypes from 'prop-types'
 import RefreshList from 'react-native-refreshlist'
-import {BOOKAPI} from '../common/Constant'
-import {fetchRequest} from '../utils/FetchHttp'
+import {BOOKAPI} from '../../common/Constant'
+import {fetchRequest} from '../../utils/FetchHttp'
+import StackRoute from "../../route/StackRouteDemo"
 
 const itemHeight = 120;
 
@@ -86,6 +87,14 @@ export default class AjhRefreshFlatList extends React.Component {
      * @private
      */
     _onItemPress(item) {
+
+        console.log("我点击了 ====> " + item.item.isbn10);
+
+        const {navigate} = this.props.navigation;
+
+        navigate('BookDetail', {
+            bookDetail: item.item,
+        });
 
     }
 

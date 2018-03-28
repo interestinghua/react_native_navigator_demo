@@ -6,26 +6,24 @@
 
 import React, {Component} from 'react';
 import {
-    Platform,
-    StyleSheet,
-    Text,
-    View
-} from 'react-native';
-
-import {
     StackNavigator
 } from 'react-navigation';
 
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 
-import Nav01 from "../component/Nav01"
 import Nav02 from "../component/Nav02"
 import Nav03 from "../component/Nav03"
+import BookDetail from '../component/BookDetail'
+import AjhRefreshFlatList from "../component/list/AjhRefreshFlatList";
 
 const StackRoute = StackNavigator({
     // 将需要跳转的页面注册在这里，全局才可以跳转
-    Nav01: {
-        screen: Nav01,
+    BookList: {
+        screen: AjhRefreshFlatList,
+        navigationOptions: {}
+    },
+    BookDetail: {
+        screen: BookDetail,
         navigationOptions: {}
     },
     Nav02: {
@@ -36,24 +34,26 @@ const StackRoute = StackNavigator({
         screen: Nav03,
         navigationOptions: {}
     }
+
 }, {
-    initialRouteName: "Nav01",
-    transitionConfig: () => ({
-        // 只要修改最后的forVertical就可以实现不同的动画了。
-        screenInterpolator: CardStackStyleInterpolator.forHorizontal,
-    }),
+    initialRouteName: "BookList",
+    // transitionConfig: () => ({
+    //     // 只要修改最后的forVertical就可以实现不同的动画了。
+    //     screenInterpolator: CardStackStyleInterpolator.forHorizontal,
+    // }),
     navigationOptions: {
-        headerStyle: {
-            backgroundColor: '#f4511e',
-        },
-        headerTintColor: '#333333',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-        },
-        headerTitle: "App",
-        showIcon: true,
-        swipeEnabled: false,
-        animationEnabled: false,
+        header: null,
+        // headerStyle: {
+        //     backgroundColor: '#f4511e',
+        // },
+        // headerTintColor: '#333333',
+        // headerTitleStyle: {
+        //     fontWeight: 'bold',
+        // },
+        // headerTitle: "App",
+        // showIcon: true,
+        // swipeEnabled: false,
+        // animationEnabled: false,
     },
     mode: 'card'
 });

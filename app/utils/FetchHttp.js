@@ -1,4 +1,7 @@
 import {BOOKAPI} from '../common/Constant'
+import {
+    ToastAndroid
+} from 'react-native'
 
 /**
  * @param {Promise} fetch_promise    fetch请求返回的Promise
@@ -50,8 +53,16 @@ export function fetchRequest(url, method, params = '') {
                 headers: header,
                 credentials: 'same-origin',
             })).then((response) => response.json())
+                .then((response) => response.code === 200)
                 .then((responseData) => {
                     console.log('resolve:', url, responseData);  //网络请求成功返回的数据
+
+                    // if (responseData.code !== 200) {
+                    //     ToastAndroid.show(responseData.msg, ToastAndroid.SHORT);
+                    // } else {
+                    //     resolve(responseData);
+                    // }
+
                     resolve(responseData);
                 })
                 .catch((err) => {
@@ -92,8 +103,17 @@ export function fetchRequest(url, method, params = '') {
                 }))
                     .then((response) => response.json())
                     .then((responseData) => {
+                        //code非200也在这里处理
                         console.log('resolve:', url, responseData);   //网络请求成功返回的数据
+
+                        // if (responseData.code !== 200) {
+                        //     ToastAndroid.show(responseData.msg, ToastAndroid.SHORT);
+                        // } else {
+                        //     resolve(responseData);
+                        // }
+
                         resolve(responseData);
+
                     })
                     .catch((err) => {
                         console.log('err:', url, err);   //网络请求失败返回的数据
@@ -115,6 +135,13 @@ export function fetchRequest(url, method, params = '') {
                     .then((response) => response.json())
                     .then((responseData) => {
                         console.log('resolve:', url, responseData);   //网络请求成功返回的数据
+
+                        // if (responseData.code !== 200) {
+                        //     ToastAndroid.show(responseData.msg, ToastAndroid.SHORT);
+                        // } else {
+                        //     resolve(responseData);
+                        // }
+
                         resolve(responseData);
                     })
                     .catch((err) => {

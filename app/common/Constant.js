@@ -39,6 +39,6 @@ export const BOOKAPI={
     TOKEN:'',
     BASEURL:'https://api.douban.com/v2/',
     SEARCH:'book/search',
-    ISBN:'book/isbn/:name'
+    ISBN:'book/isbn/'
 
 }
