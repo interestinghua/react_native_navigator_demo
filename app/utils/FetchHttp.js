@@ -1,9 +1,6 @@
 import {BOOKAPI} from '../common/Constant'
 
 /**
- * 让fetch也可以timeout
- *  timeout不是请求连接超时的含义，它表示请求的response时间，包括请求的连接、服务器处理及服务器响应回来的时间
- * fetch的timeout即使超时发生了，本次请求也不会被abort丢弃掉，它在后台仍然会发送到服务器端，只是本次请求的响应内容被丢弃而已
  * @param {Promise} fetch_promise    fetch请求返回的Promise
  * @param {number} [timeout=10000]   单位：毫秒，这里设置默认超时时间为10秒
  * @return 返回Promise
@@ -64,7 +61,6 @@ export function fetchRequest(url, method, params = '') {
         });
     } else {
         //如果网络请求中带有参数
-
         if (method === 'GET') {
 
             // let esc = encodeURIComponent;

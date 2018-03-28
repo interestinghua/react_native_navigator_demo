@@ -3,7 +3,7 @@ import {DrawerNavigator, StackNavigator, TabBarBottom, TabNavigator} from "react
 import Nav01 from "../component/Nav01";
 import Nav02 from "../component/Nav02";
 import Nav03 from "../component/Nav03";
-import List from "../list/RefreshFlatList";
+import AjhRefreshFlatList from "../list/AjhRefreshFlatList";
 import TabBarItem from "./TabBarItem";
 
 const DrawerRouteConfigs = {
@@ -50,7 +50,7 @@ const DrawerRouteConfigs = {
         },
     },
     List: {
-        screen: List,
+        screen: AjhRefreshFlatList,
         navigationOptions: {
             drawerLabel: '列表',
             drawerIcon: ({focused, tintColor}) => (
@@ -83,7 +83,7 @@ const StackRouteConfigs = {
 const StackNavigatorConfigs = {
     initialRouteName: 'Drawer',
     navigationOptions: {
-        title: '标题',
+        title: '抽屉导航',
         headerStyle: {backgroundColor: '#5da8ff'},
         headerTitleStyle: {color: '#333333'},
     }

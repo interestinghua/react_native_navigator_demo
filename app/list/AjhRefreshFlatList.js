@@ -15,7 +15,7 @@ import {fetchRequest} from '../utils/FetchHttp'
 
 const itemHeight = 120;
 
-export default class RefreshAndLoadMoreFlatList extends React.Component {
+export default class AjhRefreshFlatList extends React.Component {
 
     static propTypes = {
         type: PropTypes.number
@@ -32,7 +32,7 @@ export default class RefreshAndLoadMoreFlatList extends React.Component {
         this.state = {
             data: null,
             start: 0,
-            count: 20,
+            count: 5,
             tag: '计算机'
         };
     }
