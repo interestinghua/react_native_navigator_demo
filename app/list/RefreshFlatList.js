@@ -4,7 +4,8 @@ import {
     View,
     Text,
     ToastAndroid,
-    TouchableHighlight
+    TouchableHighlight,
+    Image
 } from 'react-native'
 
 import PropTypes from 'prop-types'
@@ -12,8 +13,7 @@ import RefreshList from 'react-native-refreshlist'
 import {BOOKAPI} from '../common/Constant'
 import {fetchRequest} from '../utils/FetchHttp'
 
-// const preData = [{keysss: 1}, {keysss: 2}, {keysss: 3}, {keysss: 4}, {keysss: 5}, {keysss: 6}, {keysss: 7}, {keysss: 8}, {keysss: 9}, {keysss: 10}];
-// const newData = [{keysss: 12}, {keysss: 23}, {keysss: 34}, {keysss: 45}, {keysss: 56}, {keysss: 67}, {keysss: 78}, {keysss: 89}, {keysss: 90}, {keysss: 10}];
+const itemHeight = 120;
 
 export default class RefreshAndLoadMoreFlatList extends React.Component {
 
@@ -29,32 +29,47 @@ export default class RefreshAndLoadMoreFlatList extends React.Component {
 
         super(props);
         this.moreTime = 0;
-
         this.state = {
             data: null,
             start: 0,
             count: 20,
-            tag: '科幻'
+            tag: '计算机'
         };
-
-        // if (this.props.type === 1) {
-        //     setTimeout(() => {
-        //         this._listRef.setError();
-        //
-        //     }, 1000);
-        // } else if (this.props.type === 2) {
-        //     setTimeout(() => {
-        //         this._listRef.setData([]);
-        //
-        //     }, 1000);
-        // } else {
-        //     setTimeout(() => {
-        //         this._listRef.setData(preData);
-        //
-        //     }, 1000);
-        // }
     }
 
+    componentWillMount() {
+        console.log("componentWillMount");
+
+    }
+
+    componentDidMount() {
+        // ToastAndroid.show(">>>" + this.props.type + "<<<", ToastAndroid.SHORT);
+        console.log("componentDidMount")
+        this._refresh();
+    }
+
+    componentWillUpdate() {
+        console.log("componentWillUpdate")
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                {/*<Text*/}
+                {/*onPress={() => {*/}
+                {/*this._back()*/}
+                {/*}}*/}
+                {/*style={{padding: 20}}>回退</Text>*/}
+                <RefreshList
+                    ref={(list) => this._listRef = list}
+                    onPullRelease={(resolve) => this._onPullRelease(resolve)}
+                    ItemHeight={itemHeight}
+                    onEndReached={() => this._loadMore()}
+                    renderItem={(item) => this._renderItem(item)}/>
+            </View>
+        );
+
+    }
 
     /**
      * 下拉刷新
@@ -62,11 +77,7 @@ export default class RefreshAndLoadMoreFlatList extends React.Component {
      */
     _onPullRelease(resolve) {
         console.log("_onPullRelease");
-        setTimeout(() => {
-            resolve();
-            this.moreTime = 0;
-            this._listRef.setData(this.state.responseText);
-        }, 500);
+        this._refresh();
     }
 
     /**
@@ -83,38 +94,60 @@ export default class RefreshAndLoadMoreFlatList extends React.Component {
      * @private
      */
     _loadMore() {
+
         console.log("_loadMore");
 
-        if (this.props.type === 4) {
-            if (!this.resume) {
-                setTimeout(() => {
-                    this._listRef.setError();
-                    this.resume = true;
-                }, 500);
-            } else {
-                setTimeout(() => {
-                    if (this.moreTime < 3) {
-                        this._listRef.addData(this.state.data);
-                        this.moreTime++;
-                    } else {
-                        this._listRef.addData([]);
-                    }
+        let searchParam = {
+            tag: this.state.tag,
+            start: this.moreTime,
+            count: this.state.count
+        };
 
-                }, 500);
-            }
+        fetchRequest(BOOKAPI.SEARCH, 'GET', searchParam).then(
+            response => {
 
-        } else {
-            setTimeout(() => {
-                if (this.moreTime < 3) {
-                    this._listRef.addData(this.state.data);
-                    this.moreTime++;
+                if (this.moreTime > 0) {
+                    this._listRef.addData(response["books"]);
                 } else {
-                    this._listRef.addData([]);
+                    this._listRef.setData(response["books"]);
                 }
 
-            }, 500);
-        }
+                this.moreTime++;
+                this._listRef.resolveHandler();
 
+            }, error => {
+                this._listRef.resolveHandler();
+                this._listRef.setError();
+                console.log('_loadMore error: ' + error)
+            })
+
+    }
+
+    /**
+     * 下拉刷新
+     * @private
+     */
+    _refresh() {
+
+        this.moreTime = 0;
+
+        let searchParam = {
+            tag: this.state.tag,
+            start: 0,
+            count: this.state.count
+        };
+
+        fetchRequest(BOOKAPI.SEARCH, 'GET', searchParam).then(
+            response => {
+
+                this._listRef.setData(response["books"]);
+                this._listRef.resolveHandler();
+
+            }, error => {
+                this._listRef.resolveHandler();
+                this._listRef.setError();
+                console.log('_refresh error: ' + error)
+            })
     }
 
     /**
@@ -124,23 +157,36 @@ export default class RefreshAndLoadMoreFlatList extends React.Component {
      * @private
      */
     _renderItem(item) {
-        // JSON.stringify(response["books"])
-        console.log("_renderItem" + JSON.stringify(item));
+
+        item.index.toString();
+
         return (
+
             <TouchableHighlight
                 underlayColor="rgba(34, 26, 38, 0.1)"
                 onPress={() => {
                     this._onItemPress(item)
                 }}>
-                <View style={styles.listWrapper}>
-                    <View
-                        style={styles.listItemWrapper}><Text>{item.item.isbn10}</Text></View>
-                    <View
-                        style={styles.listItemWrapper}><Text>{item.item.isbn13}</Text></View>
-                    <View style={styles.listItemWrapper}><Text
-                        style={styles.listItemTextBlue}>{item.item.pubdate}</Text></View>
-                    <View style={styles.listItemWrapper}><Text
-                        style={styles.listItemTextRed}>{item.item.binding}</Text></View>
+                <View style={styles.listItem}>
+                    <View style={styles.listLeft}>
+                        <Image source={{uri: item.item.images["medium"]}}
+                               style={{width: 80, height: 80}}/>
+                    </View>
+                    <View style={styles.listRight}>
+                        <View
+                            style={styles.listRightItem}><Text
+                            style={styles.listItemTextRed}>{"价格： " + item.item.price}</Text></View>
+                        <View
+                            style={styles.listRightItem}><Text
+                            style={styles.listItemTextRed}>{"ISBN10： " + item.item.isbn10}</Text></View>
+                        <View style={styles.listRightItem}><Text
+                            style={styles.listItemTextBlue}>{"出版社： " + item.item.publisher}</Text></View>
+                        <View style={styles.listRightItem}><Text
+                            style={styles.listItemTextRed}>{"第一作者： " + item.item.author[0]}</Text></View>
+                        <View style={styles.listRightItem}><Text
+                            style={styles.listItemTextRed}>{"出版时间： " + item.item.pubdate}</Text></View>
+                    </View>
+
                 </View>
             </TouchableHighlight>
         )
@@ -158,64 +204,7 @@ export default class RefreshAndLoadMoreFlatList extends React.Component {
         return false;
     }
 
-    componentWillMount() {
-        console.log("componentWillMount")
 
-    }
-
-    componentDidMount() {
-
-        // ToastAndroid.show(">>>" + this.props.type + "<<<", ToastAndroid.SHORT);
-        console.log("componentDidMount")
-
-        let searchParam = {
-            tag: this.state.tag,
-            start: this.state.start,
-            count: this.state.count
-        };
-
-        fetchRequest(BOOKAPI.SEARCH, 'GET', searchParam).then(
-            response => {
-
-                this.setState({
-                    'data': response["books"],
-                    'start': this.state.start++
-                });
-
-                this._listRef.setData(response["books"]);
-
-                console.log('books: ' + this.state.data)
-                console.log('start: ' + this.state.start)
-
-            }, error => {
-                console.log('error: ' + error)
-            })
-    }
-
-
-    componentWillUpdate() {
-        console.log("componentWillUpdate")
-
-    }
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text
-                    onPress={() => {
-                        this._back()
-                    }}
-                    style={{padding: 20}}>回退</Text>
-                <RefreshList
-                    ref={(list) => this._listRef = list}
-                    onPullRelease={(resolve) => this._onPullRelease(resolve)}
-                    ItemHeight={100}
-                    onEndReached={() => this._loadMore()}
-                    renderItem={(item) => this._renderItem(item)}/>
-            </View>
-        );
-
-    }
 }
 
 const styles = StyleSheet.create({
@@ -223,25 +212,42 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
-    listWrapper: {
-        width: '100%',
+    listItem: {
+        width: "100%",
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        height: 100,
+        height: itemHeight,
         borderTopWidth: 1,
         borderTopColor: '#EBEBEB',
+        padding: 30
+
     },
-    listItemWrapper: {
-        width: '25%',
+    listLeft: {
+        width: '20%',
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 10
     },
+    listRight: {
+        width: '80%',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        paddingLeft: 20,
+    },
+
+    listRightItem: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+    },
+
     listItemTextBlue: {
-        color: '#45a162',
+        color: '#000000',
     },
+
     listItemTextRed: {
-        color: '#c84a4a',
+        color: '#000000',
     }
 });

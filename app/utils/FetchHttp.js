@@ -43,7 +43,7 @@ export function fetchRequest(url, method, params = '') {
         // "Content-Type": "application/json"
     };
 
-    console.log('request url:', url, params);  //打印请求参数
+    // console.log('request url:', url, params);  //打印请求参数
 
     if (params === '') {
         //如果网络请求中没有参数
@@ -54,7 +54,7 @@ export function fetchRequest(url, method, params = '') {
                 credentials: 'same-origin',
             })).then((response) => response.json())
                 .then((responseData) => {
-                    console.log('res:', url, responseData);  //网络请求成功返回的数据
+                    console.log('resolve:', url, responseData);  //网络请求成功返回的数据
                     resolve(responseData);
                 })
                 .catch((err) => {
@@ -76,7 +76,7 @@ export function fetchRequest(url, method, params = '') {
             Object.keys(params).forEach(key => paramsArray.push(key + '=' + params[key]));
 
             console.log('params:', params);
-            console.log('paramsArray:', paramsArray);
+            // console.log('paramsArray:', paramsArray);
 
             if (url.search(/\?/) === -1) {
                 url += '?' + paramsArray.join('&');
@@ -96,7 +96,7 @@ export function fetchRequest(url, method, params = '') {
                 }))
                     .then((response) => response.json())
                     .then((responseData) => {
-                        console.log('res:', url, responseData);   //网络请求成功返回的数据
+                        console.log('resolve:', url, responseData);   //网络请求成功返回的数据
                         resolve(responseData);
                     })
                     .catch((err) => {
@@ -118,7 +118,7 @@ export function fetchRequest(url, method, params = '') {
                 })
                     .then((response) => response.json())
                     .then((responseData) => {
-                        console.log('res:', url, responseData);   //网络请求成功返回的数据
+                        console.log('resolve:', url, responseData);   //网络请求成功返回的数据
                         resolve(responseData);
                     })
                     .catch((err) => {

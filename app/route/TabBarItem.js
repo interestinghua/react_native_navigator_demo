@@ -22,9 +22,9 @@ export default class TabBarItem extends Component {
     // };
 
     render() {
-        console.debug("-----------------------------------------------");
-        console.debug(this.props);
-        console.debug("===============================================");
+        // console.debug("-----------------------------------------------");
+        // console.debug(this.props);
+        // console.debug("===============================================");
         return (
 
 
