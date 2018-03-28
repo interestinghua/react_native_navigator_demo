@@ -67,38 +67,38 @@ export default class BookDetail extends React.Component {
     render() {
         return (
             // contentContainerStyle={styles.styleScrollView}
-            <ScrollView >
+            <ScrollView>
 
                 {/*<View style={styles.container}>*/}
 
-                    <View style={styles.styleImage}>
-                        <Image source={{uri: this.state.imageUrl}}
-                               style={{width: 100, height: 100}}/>
-                    </View>
+                <View style={styles.styleImage}>
+                    <Image source={{uri: this.state.imageUrl}}
+                           style={{width: 100, height: 100}}/>
+                </View>
 
-                    <View style={styles.styleScrollView}>
-                        <Text style={styles.styleTextColor}>
-                            {this.state.author}
-                        </Text>
-                    </View>
+                <View style={styles.styleScrollView}>
+                    <Text style={styles.styleTextColor}>
+                        {this.state.author}
+                    </Text>
+                </View>
 
-                    <View style={styles.styleScrollView}>
-                        <Text style={styles.styleTextColor}>
-                            {this.state.authorIntro}
-                        </Text>
-                    </View>
+                <View style={styles.styleScrollView}>
+                    <Text style={styles.styleTextColor}>
+                        {this.state.authorIntro}
+                    </Text>
+                </View>
 
-                    <View style={styles.styleScrollView}>
-                        <Text style={styles.styleTextColor}>
-                            {this.state.catalog}
-                        </Text>
-                    </View>
+                <View style={styles.styleScrollView}>
+                    <Text style={styles.styleTextColor}>
+                        {this.state.catalog}
+                    </Text>
+                </View>
 
-                    <View style={styles.styleScrollView}>
-                        <Text style={styles.styleTextColor}>
-                            {this.state.summary}
-                        </Text>
-                    </View>
+                <View style={styles.styleScrollView}>
+                    <Text style={styles.styleTextColor}>
+                        {this.state.summary}
+                    </Text>
+                </View>
 
                 {/*</View>*/}
 
